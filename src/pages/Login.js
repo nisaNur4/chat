@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { auth } from '../firebase/firebaseConfig';
+import { auth } from '../firebase/firebaseConfig'; 
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+// Giriş yapmak veya başarısız girişte oturum kapatmak
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -14,10 +15,10 @@ function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       if (userCredential.user.emailVerified) {
-        localStorage.setItem('loginTime', Date.now());
+        localStorage.setItem('loginTime', Date.now()); // Giriş zamanı
         navigate('/chat');
       } else {
-        alert('Lütfen email adresinizi doğrulayın!');
+        alert('Lütfen, e-mail adresinizi doğrulayın!');
         await signOut(auth);
       }
     } catch (error) {

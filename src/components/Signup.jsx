@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; // Fonksiyonel bileşenlerde dinamik değerler
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
+// E-posta ve şifre ile yeni bir kullanıcı hesabı 
+// Doğrulama e-postası 
+import { auth } from "../firebase/firebaseConfig"; // Kimlik doğrulama 
 
-const Signup = () => {
-  const [email, setEmail] = useState("");
+const Signup = () => { // Fonksiyonel React bileşeni tanımlanır
+  const [email, setEmail] = useState(""); // E-posta adresini tutar.
   const [password, setPassword] = useState("");
+  // Başlangıç değeri boş bir stringdir ve kullanıcının girdiği şifreyi tutar.
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
+  const handleSignup = async (e) => { // Kayıt formu gönderir.
+    e.preventDefault(); // Javascript event.preventDefault fonksiyonu
+    // Bu fonksiyon çağrıldığında oluşan olayın işlevini geçersiz kılar. 
+    // Sayfanın yeniden yüklenmesini engeller.
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log("Kayıt başarılı:", user);
 
-      // Email doğrulama maili gönder
-      await sendEmailVerification(user);
+      await sendEmailVerification(user); // Doğrulama maili gönderir.
       alert("Kayıt başarılı! E-posta doğrulama bağlantısı gönderildi.");
     } catch (error) {
-      console.error("Kayıt hatası:", error.message);
+      console.error("Kayıt hatası:", error.message); // Hata nedeni
       alert(error.message);
     }
-  };
+  }; // "try" kodları çalışma zamanında test etmek için 
+  // "catch" çalışma zamanında çıkan hataları yakalamak için
+  // Hata oluşursa "catch" bloğundaki kod çalışır.
 
+  // JS
   return (
     <div>
       <h2>Kayıt Ol</h2>
@@ -31,8 +38,8 @@ const Signup = () => {
           type="email"
           placeholder="E-posta"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+          onChange={(e) => setEmail(e.target.value)} 
+          required // Zorunlu
         />
         <input
           type="password"
@@ -47,4 +54,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signup; //Dışa aktarır.

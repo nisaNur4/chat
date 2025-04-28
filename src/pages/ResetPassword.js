@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../firebase/firebaseConfig'; // Firebase ayarların burada
+import { auth } from '../firebase/firebaseConfig'; 
 
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
@@ -12,13 +12,13 @@ const ResetPassword = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage('Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.');
-      setError('');
+      setError(''); // Başarılı ollursa önceki hataları temizlemek için: error, boş bir string
     } catch (err) {
       setError('Bir hata oluştu. E-posta doğru mu kontrol edin.');
-      setMessage('');
+      setMessage(''); // Hatalıysa başarı mesajlarını temizler: message, boş string
     }
   };
-
+ 
   return (
     <div>
       <h2>Şifremi Unuttum</h2>

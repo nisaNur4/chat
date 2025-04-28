@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase/firebaseConfig';
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Geçiş
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Kaydolduktan sonra yönlendirir.
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ function Register() {
   );
 }
 
-const styles = {
+const styles = { // HTML
   container: {
     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh'
   },

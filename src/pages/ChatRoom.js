@@ -1,6 +1,7 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react'; // Bir bileşeni harici bir sistem ile senkronize etmek
+// Bir fonksiyon tanımının, optimize edilmiş bir bileşene iletilmeden önce önbelleğe alınmasını sağlar.
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth'; // Firebase Authentication ve oturum kapatmak
 
 const ChatRoom = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const ChatRoom = () => {
         navigate('/login');
       })
       .catch((error) => {
-        console.error('Çıkış yaparken hata oluştu:', error);
+        console.error('Çıkış yaparken hata oluştu: ', error);
       });
   }, [auth, navigate]); // Dışarıdan kullandıklarımızı dependency listesine yazdık
 
@@ -23,8 +24,9 @@ const ChatRoom = () => {
       handleLogout();
     }, 3600000); // 1 saat
 
-    return () => clearTimeout(timer);
-  }, [handleLogout]); // Artık güvenle handleLogout'u kullanıyoruz
+    return () => clearTimeout(timer); // Bellek sızıntılarını önler.
+  }, [handleLogout]); // UseEffect bağımlılık dizisidir. HandleLogout referansı değiştiğinde yeniden çalışır. 
+  // Auth ve navigate değişmediği (useCallback) sürece aynı kalır. Gereksiz zamanlayıcı yeniden kurulumlarını önler. 
 
   return (
     <div style={styles.container}>

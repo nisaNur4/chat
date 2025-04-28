@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// Sayfa geçişlerini yönetir. URL-bileşen.
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ChatRoom from './pages/ChatRoom';
-import ResetPassword from './pages/ResetPassword'; // <<<<< BURAYA YENİ İMPORT
+import ResetPassword from './pages/ResetPassword'; 
 
 function App() {
   return (
@@ -20,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; // Dışa aktarır.
